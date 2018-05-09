@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".menu.login.RegistroFragment">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:layout_width="match_parent"
+            android:padding="20dp"
+            android:orientation="vertical"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_horizontal">
+
+            <ImageView
+
+                android:layout_weight="1"
+
+                android:src="@drawable/ic_icono_grande"
+                android:layout_width="50dip"
+                android:layout_height="50dip"
+                android:scaleType="fitXY"
+                android:layout_gravity="center_horizontal"
+                />
+            <TextView
+                android:text="Registro"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:scaleType="fitXY"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="15dp"
+                android:fontFamily="sans-serif-condensed"
+                android:textSize="25dp"
+                android:typeface="serif"
+
+                android:textStyle="bold"
+
+                />
+            <TextView
+                android:text="Nombre"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <EditText
+                android:id="@+id/registroNombre"
+                android:layout_width="match_parent"
+                android:layout_marginBottom="10dp"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:text="Apellido"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <EditText
+                android:id="@+id/registroApellido"
+                android:layout_width="match_parent"
+                android:layout_marginBottom="10dp"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:text="Correo Electronico"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <EditText
+                android:id="@+id/registroEmail"
+                android:layout_width="match_parent"
+                android:layout_marginBottom="10dp"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:text="Fecha de Nacimiento"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"/>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp">
+
+
+                <Button android:id="@+id/myDatePickerButtonRegistro"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="#FF4081"
+                    android:textColor="#fff"
+                    android:text="Fecha"/>
+
+                <EditText
+                    android:id="@+id/registroDate"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content" />
+
+
+            </LinearLayout>
+
+            <TextView
+                android:text="Genero"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"/>
+
+
+            <RadioGroup
+                android:id="@+id/radio"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginBottom="10dp"
+                >
+
+
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Femenino"
+                    android:id="@+id/radioButtonFemeninoRegistro"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerHorizontal="true"
+                    android:checked="true"
+                    />
+
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Masculino"
+                    android:id="@+id/radioButtonMasculinoRegistro"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerHorizontal="true"
+                    android:checked="false"
+                    />
+
+            </RadioGroup>
+
+
+            <TextView
+                android:text="Nombre Usuario"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"/>
+
+            <EditText
+                android:id="@+id/registroUsuario"
+                android:layout_width="match_parent"
+
+                android:layout_marginBottom="10dp"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:text="Contraseña"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+<!--
+            <EditText
+                android:id="@+id/registroPassword"
+                android:layout_width="match_parent"
+                android:inputType="textPassword"
+                android:layout_marginBottom="10dp"
+                android:layout_height="wrap_content" />-->
+
+            <android.support.design.widget.TextInputLayout
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:passwordToggleEnabled="true">
+
+                <android.support.design.widget.TextInputEditText
+                    android:id="@+id/registroPassword"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+
+                    android:inputType="textPassword"
+                    android:layout_marginBottom="10dp"/>
+            </android.support.design.widget.TextInputLayout>
+
+
+            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="match_parent"
+                android:padding="10dp"
+                android:orientation="vertical"
+                android:layout_height="match_parent"
+                android:background="#FFD180">
+
+                <TextView
+                    android:text="Registrar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"/>
+
+
+                <Button
+                    android:id="@+id/btmRegister"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#0091EA"
+                    android:textColor="#fff"
+                    android:text="Registrar"
+                    android:layout_marginBottom="10dp"/>
+
+                <TextView
+                    android:text="¿Ya te encuentras registrado?"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"/>
+
+
+                <Button
+                    android:id="@+id/btmRegisterLogin"
+                    android:layout_width="match_parent"
+                    android:layout_marginBottom="10dp"
+                    android:layout_height="wrap_content"
+                    android:background="#0091EA"
+                    android:textColor="#fff"
+                    android:text="Iniciar sesion" />
+
+
+            </LinearLayout>
+
+
+
+        </LinearLayout>
+    </ScrollView>
+
+</FrameLayout>

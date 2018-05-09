@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+    <group android:checkableBehavior="single">
+
+        <!--OPCIONES DEL MENU PRINCIPAL-->
+        <item
+            android:id="@+id/nav_foto_juego"
+            android:icon="@drawable/ic_menu_camera"
+            android:title="Foto Juego" />
+        <item
+            android:id="@+id/nav_audio_juego"
+            android:icon="@drawable/ic_menu_slideshow"
+            android:title="Audio Juego" />
+        <item
+            android:id="@+id/nav_memoria"
+            android:icon="@drawable/ic_menu_gallery"
+            android:title="Juego Memoria" />
+
+    </group>
+
+    <group
+        android:id="@+id/menu_bottom"
+        android:checkableBehavior="none">
+
+        <item
+            android:id="@+id/nav_perfil"
+            android:icon="@drawable/ic_menu_manage"
+            android:title="Perfil" />
+
+        <item
+            android:id="@+id/cerrar_sesion_nav"
+            android:icon="@drawable/ic_power_settings_new_black_24dp"
+            android:title="Cerrar Sesion" />
+    </group>
+
+
+</menu>

@@ -1,0 +1,36 @@
+<resources>
+
+    <string name="title_activity_main">Ayuda UCAB</string>
+    <string name="app_name">Ayuda UCAB</string>
+    <string name="tab_text_1">Iniciar Sesion</string>
+    <string name="tab_text_2">Registrar</string>
+    <string name="tab_text_3">Rescuperar contraseña</string>
+    <string name="action_settings1">Ajustes</string>
+    <string name="section_format1">Hello World from section: %1$d</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+
+    <string name="nameerror">Ingresar un nombre valido</string>
+    <string name="apellidoerror">Ingresar un apellido valido</string>
+    <string name="emailerror">Ingresar un email valido</string>
+    <string name="usuarioerror">Ingresar un email valido</string>
+    <string name="passworderror">Ingresar un email valido</string>
+
+
+    <string name="title_activity_menu_principal">Ayuda UCAB</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Salir</string>
+
+    <string name="section_format">Hello World from section: %1$d</string>
+
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="title_activity_login">Ayuda UCAB</string>
+
+</resources>
