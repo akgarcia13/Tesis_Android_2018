@@ -3,10 +3,12 @@ package com.example.karina.ayudaucab.menu.login;
 import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.util.Patterns;
 import android.view.LayoutInflater;
@@ -15,7 +17,9 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.RadioButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.basgeekball.awesomevalidation.AwesomeValidation;
@@ -122,14 +126,14 @@ public class RegistroFragment extends Fragment {
     private EditText mDateDisplay;
     private EditText nombre,apellido,email,usuario,password;
     private Button mPickDate, registrar, ir_inicio;
-
+    View view;
     Context context;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view =inflater.inflate(R.layout.fragment_registro, container, false);
+         view =inflater.inflate(R.layout.fragment_registro, container, false);
         context = view.getContext();
 
         awesomeValidation = new AwesomeValidation(ValidationStyle.BASIC);
@@ -292,7 +296,31 @@ public class RegistroFragment extends Fragment {
                 System.out.println("Se ha registrado");
                 Toast.makeText(getActivity(), "Se ha registrado con exito ", Toast.LENGTH_LONG).show();
                 hidepDialog();
-                ((LoginActivity)getActivity()).selectTab(0);
+
+
+
+                AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context);
+                LayoutInflater inflater = getActivity().getLayoutInflater();
+                alertDialogBuilder
+                        .setView(inflater.inflate(R.layout.mensaje_layout,null))
+                        .setMessage(" Registro Exitoso ")
+                        .setCancelable(false)
+                        .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialogInterface, int i) {
+
+                                        ((LoginActivity)getActivity()).selectTab(0);
+                                        dialogInterface.dismiss();
+                                    }
+                                }
+
+                        )
+
+                ;
+                AlertDialog alertDialog = alertDialogBuilder.create();
+                alertDialog.show();
+
+
 
             }else{
                 awesomeValidation.clear();

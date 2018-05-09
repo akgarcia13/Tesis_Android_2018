@@ -3,12 +3,14 @@ package com.example.karina.ayudaucab.menu.principal;
 import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.util.Patterns;
 import android.view.LayoutInflater;
@@ -384,14 +386,32 @@ public class ActualizarPerfil extends Fragment {
             {
                 hidepDialog();
                 guardarPreferencias();
+                AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context);
+                LayoutInflater inflater = getActivity().getLayoutInflater();
+                alertDialogBuilder
+                        .setView(inflater.inflate(R.layout.mensaje_layout,null))
+                        .setMessage("  Actualizacion Exitosa")
+                        .setCancelable(false)
+                        .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialogInterface, int i) {
+
+                                        Intent intent = new Intent(context, MenuPrincipal.class);
+
+
+                                        startActivity(intent);
+
+                                        dialogInterface.dismiss();
+                                    }
+                                }
+
+                        )
+
+                ;
+                AlertDialog alertDialog = alertDialogBuilder.create();
+                alertDialog.show();
                 System.out.println("Usuario Actualizado");
-                Intent intent = new Intent(context, MenuPrincipal.class);
 
-                /*Bundle bundle = new Bundle();
-
-                bundle.putParcelable("usuario",user);
-                intent.putExtras(bundle);*/
-                startActivity(intent);
 
 
 

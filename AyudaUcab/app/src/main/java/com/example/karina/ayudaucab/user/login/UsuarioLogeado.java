@@ -26,7 +26,7 @@ public  class UsuarioLogeado {
         }
         return  false;
     }
-    public static void setAumentoNivel(int aumentoNivel){
-        usuarioLogeado.get(0).setUs_nivel_juego(aumentoNivel);
+    public static void setAumentoNivel(){
+        usuarioLogeado.get(0).setUs_nivel_juego(usuarioLogeado.get(0).getUs_nivel_juego()+1);
     }
 }

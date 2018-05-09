@@ -691,7 +691,7 @@ public class FotoJuego extends Fragment implements Response.Listener<JSONObject>
                     user.setUs_email(params[4]);
                     user.setUs_password(params[5]);
                     user.setUs_nivel_juego(perfil_usuario.getUs_nivel_juego()+1);
-                    UsuarioLogeado.setAumentoNivel(perfil_usuario.getUs_nivel_juego()+1);
+                    UsuarioLogeado.setAumentoNivel();
                     salir = params[6];
 
                 }
