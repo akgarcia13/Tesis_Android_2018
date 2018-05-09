@@ -66,7 +66,7 @@ public class MenuPrincipal extends AppCompatActivity
         View headerView =  navigationView.getHeaderView(0);
 
         menuPrincipalNivelJuego = (TextView) headerView.findViewById(R.id.menuPrincipalNivelJuego);
-        if(usuario_perfil.getUs_nivel_juego() <2) {
+        /*if(usuario_perfil.getUs_nivel_juego() <2) {
             menuPrincipalNivelJuego.setText("Nivel " + 1);
         }else if(usuario_perfil.getUs_nivel_juego() >= 2 && usuario_perfil.getUs_nivel_juego() < 4  ) {
             menuPrincipalNivelJuego.setText("Nivel " + 2);
@@ -86,8 +86,8 @@ public class MenuPrincipal extends AppCompatActivity
             menuPrincipalNivelJuego.setText("Nivel " + 9);
         }else if(usuario_perfil.getUs_nivel_juego() >= 17) {
             menuPrincipalNivelJuego.setText("Nivel " + 10);
-        }
-
+        }*/
+        menuPrincipalNivelJuego.setText("NIVEL: "+usuario_perfil.getUs_nivel_juego());
         textView =(TextView)headerView.findViewById(R.id.textView);
         textView.setText("Hola! "+usuario_perfil.getUs_nombre());
 
@@ -203,86 +203,6 @@ public class MenuPrincipal extends AppCompatActivity
         if(fragmentoSeleccionado)
         {
 
-                /*if (usuario_perfil != null) {
-                    TareaWSIniciarSesion tarea = new TareaWSIniciarSesion();
-                   tarea.execute(
-                            usuario_perfil.getUs_nombre_usuario().toString(),
-                            usuario_perfil.getUs_password().toString(),
-                            usuario_perfil.getUs_email().toString()
-
-                    );
-                }*/
-
-
-
-
-                //SE MANDA EL USUARIO A ACTUALIZAR
-            /*Bundle objetoEnviado = getIntent().getExtras();
-            if (fragment instanceof  ActualizarPerfil)
-            {
-                if(objetoEnviado  != null)
-                {
-                    usuario_perfil = objetoEnviado.getParcelable("usuario");
-                    if(usuario_perfil != null) {
-                        Toast.makeText(getApplicationContext(), "Usuario : "+usuario_perfil.getUs_nombre_usuario(), Toast.LENGTH_LONG).show();
-                        Bundle bundle = new Bundle();
-                        bundle.putParcelable("perfil_usuario",usuario_perfil);
-                        fragment.setArguments(bundle);
-                    }
-
-
-                }
-
-
-
-
-            }
-
-
-            //SE MANDA EL USUARIO A FOTO JUEGO
-            if (fragment instanceof  FotoJuego)
-            {
-                if(objetoEnviado  != null)
-                {
-                    usuario_perfil = objetoEnviado.getParcelable("usuario");
-                    if(usuario_perfil != null) {
-                        //Toast.makeText(getApplicationContext(), "Usuario : "+usuario_perfil.getUs_nombre_usuario(), Toast.LENGTH_LONG).show();
-                        Bundle bundle = new Bundle();
-                        bundle.putParcelable("perfil_usuario_fotoJuego",usuario_perfil);
-                        fragment.setArguments(bundle);
-                    }
-                }
-            }
-
-
-            //SE MANDA EL USUARIO A FOTO JUEGO
-            if (fragment instanceof  AudioJuego)
-            {
-                if(objetoEnviado  != null)
-                {
-                    usuario_perfil = objetoEnviado.getParcelable("usuario");
-                    if(usuario_perfil != null) {
-                        //Toast.makeText(getApplicationContext(), "Usuario : "+usuario_perfil.getUs_nombre_usuario(), Toast.LENGTH_LONG).show();
-                        Bundle bundle = new Bundle();
-                        bundle.putParcelable("perfil_usuario_AudioJuego",usuario_perfil);
-                        fragment.setArguments(bundle);
-                    }
-                }
-            }
-            if (fragment instanceof  MemoriaJuego)
-            {
-                if(objetoEnviado  != null)
-                {
-                    usuario_perfil = objetoEnviado.getParcelable("usuario");
-                    if(usuario_perfil != null) {
-                        //Toast.makeText(getApplicationContext(), "Usuario : "+usuario_perfil.getUs_nombre_usuario(), Toast.LENGTH_LONG).show();
-                        Bundle bundle = new Bundle();
-                        bundle.putParcelable("perfil_usuario_Memoria",usuario_perfil);
-                        fragment.setArguments(bundle);
-                    }
-                }
-
-            }*/
 
             getSupportFragmentManager().beginTransaction().replace(R.id.Contenedor, fragment).commit();
         }

@@ -144,7 +144,7 @@ public class RegistroFragment extends Fragment {
 
         mDateDisplay = (EditText)view.findViewById(R.id.registroDate);
 
-
+        mDateDisplay.setKeyListener(null);
         mPickDate = (Button)view.findViewById(R.id.myDatePickerButtonRegistro);
         mPickDate.setOnClickListener(new View.OnClickListener()
         {

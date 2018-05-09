@@ -152,7 +152,7 @@ public class ActualizarPerfil extends Fragment {
         //femenino= (RadioButton) view.findViewById(R.id.radioButtonFemeninoActulizar);
 
         mDateDisplay = (EditText)view.findViewById(R.id.actulizarDate);
-
+        mDateDisplay.setKeyListener(null);
         mPickDate = (Button)view.findViewById(R.id.myDatePickerButtonActulizar);
         mPickDate.setOnClickListener(new View.OnClickListener()
         {

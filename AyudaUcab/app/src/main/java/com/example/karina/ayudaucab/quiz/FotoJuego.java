@@ -129,16 +129,7 @@ public class FotoJuego extends Fragment implements Response.Listener<JSONObject>
     private  int intento=2;
     Context context;
 
-    private String preguntasAnimal [] = {
-            "Gato", "Perro", "Estrella","Caballo",
-            "Tigre","Tortuga"
 
-    };
-    private String preguntasDeporte [] = {
-            "Basket", "Beisbol", "Futbol",
-            "Natacion"
-
-    };
     View view;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -212,6 +203,7 @@ public class FotoJuego extends Fragment implements Response.Listener<JSONObject>
     @Override
     public void onResponse(JSONObject response) {
         hidepDialog();
+
         //Toast.makeText(getContext(),"Mensaje: "+response,Toast.LENGTH_SHORT).show();
         imagenPregunta = new Imagen();
         try {
@@ -235,14 +227,15 @@ public class FotoJuego extends Fragment implements Response.Listener<JSONObject>
             fotoPregunta.setImageBitmap(imagenPregunta.getImagen());
             texto1.setText("¿Que " + imagenPregunta.getIma_categoria() + "  es ?");
             texto2.setText("Intentos: " + intento);
+
+
             Handler handler = new Handler();
             handler.postDelayed(new Runnable() {
                 @Override
                 public void run() {
-                    // Verifica si la imagen selecionada son iguales
-                    quizJuego(imagenPregunta);
-                }
-            },10);
+                                        quizJuego(imagenPregunta);
+               }
+            },100);
 
 
 
@@ -253,22 +246,7 @@ public class FotoJuego extends Fragment implements Response.Listener<JSONObject>
 
 
 
-        /*new Thread(new Runnable() {
-            public void run() {
-                //Aquí ejecutamos nuestras tareas costosas
-                quizJuego(imagenPregunta);
-            }
-        }).start();*/
 
-        /*if(!imagenPregunta.getIma_categoria().equalsIgnoreCase("null")){
-
-
-            quizJuego();
-        }else{
-
-            Intent intent = new Intent(context, MenuPrincipal.class);
-            startActivity(intent);
-        }*/
     }
 
 
@@ -369,6 +347,13 @@ public class FotoJuego extends Fragment implements Response.Listener<JSONObject>
                             public void onClick(DialogInterface dialogInterface, int i) {
 
                                 if(InternetExcepcion.isOnline(context)){
+
+
+
+                                    progreso = new ProgressDialog(getContext());
+                                    progreso.setMessage("Subiste de nivel!!! ...");
+                                    progreso.setCancelable(false);
+                                    showpDialog();
                                     TareaWSAumentarNivel tarea1 = new TareaWSAumentarNivel();
                                     tarea1.execute(
                                             perfil_usuario.getUs_nombre_usuario().toString(),
@@ -405,6 +390,10 @@ public class FotoJuego extends Fragment implements Response.Listener<JSONObject>
                             public void onClick(DialogInterface dialogInterface, int i) {
 
                                 if(InternetExcepcion.isOnline(context)){
+                                    progreso = new ProgressDialog(getContext());
+                                    progreso.setMessage("Subiste de nivel!!! ...");
+                                    progreso.setCancelable(false);
+                                    showpDialog();
                                     TareaWSAumentarNivel tarea1 = new TareaWSAumentarNivel();
                                     tarea1.execute(
                                             perfil_usuario.getUs_nombre_usuario().toString(),
@@ -458,17 +447,22 @@ public class FotoJuego extends Fragment implements Response.Listener<JSONObject>
 
     int numeroAleatorio;
     public void quizJuego(final Imagen imagenPregunta){
+        String preguntasAnimal [] = {
+                "Gato", "Perro", "Estrella","Caballo",
+                "Tigre","Tortuga"
+
+        };
+        String preguntasDeporte [] = {
+                "Basket", "Beisbol", "Futbol",
+                "Natacion"
+
+        };
       try {
 
-          //fotoPregunta.setImageBitmap(imagenPregunta.getImagen());
-          //texto1.setText("¿Que " + imagenPregunta.getIma_categoria() + "  es ?");
-          //texto2.setText("Intentos: " + intento);
 
-
-          /*Toast.makeText(getActivity(), "Categoria: "+imagenPregunta.getIma_categoria().
-               toString(), Toast.LENGTH_LONG).show();*/
 
           //PARA RELLENAR LOS BOTONES DE LAS RESPUESTAS INCORRECTAS deporte
+
           if (imagenPregunta.getIma_categoria().equalsIgnoreCase("Deporte")) {
 
               numeroAleatorio = numeroAleatorio(4);
@@ -477,12 +471,11 @@ public class FotoJuego extends Fragment implements Response.Listener<JSONObject>
               String tempString = imagenPregunta.getIma_respuesta_correcta();
 
 
-              // respuesta1.setText(respuestaCorrecta);
               while (tempString.equalsIgnoreCase(imagenPregunta.getIma_respuesta_correcta())) {
                   numeroAleatorio = numeroAleatorio(4);
                   tempString = preguntasDeporte[numeroAleatorio];
-                  // Toast.makeText(getActivity(), "Aqui el error", Toast.LENGTH_LONG).show();
                   //BUSCA ARRIBA
+                  System.out.println("error 1 - Animales");
 
               }
               respuesta1.setText(tempString);
@@ -493,15 +486,19 @@ public class FotoJuego extends Fragment implements Response.Listener<JSONObject>
               // respuesta2.setText(respuestaCorrecta);
 
               //mientras que arriba no agarre la respuesta correcta, entonces vas a agarrar la respuesta incorrecta
+              //while (tempString2.equalsIgnoreCase(imagenPregunta.getIma_respuesta_correcta())) {
+              System.out.println("error 2 - Animales");
+
               while (tempString2.equalsIgnoreCase(imagenPregunta.getIma_respuesta_correcta())) {
-
-                  while (numeroAleatorio == temp) {
-                      numeroAleatorio = numeroAleatorio(4);
-
-                  }
-                  tempString2 = preguntasDeporte[numeroAleatorio];
+                  numeroAleatorio = numeroAleatorio(4);
+                  if(numeroAleatorio != temp)
+                      tempString2 = preguntasDeporte[numeroAleatorio];
+                  System.out.println("error 1 - Deporte");
+                  // Toast.makeText(getActivity(), "Aqui el error", Toast.LENGTH_LONG).show();
 
               }
+
+              //}
               respuesta2.setText(tempString2);
 
 
@@ -514,7 +511,8 @@ public class FotoJuego extends Fragment implements Response.Listener<JSONObject>
               while (tempString1.equalsIgnoreCase(imagenPregunta.getIma_respuesta_correcta())) {
                   numeroAleatorio = numeroAleatorio(4);
                   tempString1 = preguntasAnimal[numeroAleatorio];
-                  //Toast.makeText(getActivity(), "Aqui el error", Toast.LENGTH_LONG).show();
+                  System.out.println("error 1 - Deporte");
+                  // Toast.makeText(getActivity(), "Aqui el error", Toast.LENGTH_LONG).show();
 
               }
               respuesta1.setText(tempString1);
@@ -522,21 +520,27 @@ public class FotoJuego extends Fragment implements Response.Listener<JSONObject>
               int temp = numeroAleatorio;
 
               //respuesta2.setText(respuestaCorrecta);
-              while (tempString2.equalsIgnoreCase(respuestaCorrecta)) {
+              // while (tempString2.equalsIgnoreCase(respuestaCorrecta)) {
 
-                  while (numeroAleatorio == temp) {
-                      numeroAleatorio = numeroAleatorio(4);
-
-                  }
-                  tempString2 = preguntasAnimal[numeroAleatorio];
+              while (tempString2.equalsIgnoreCase(imagenPregunta.getIma_respuesta_correcta())) {
+                  numeroAleatorio = numeroAleatorio(4);
+                  if(numeroAleatorio != temp)
+                      tempString2 = preguntasAnimal[numeroAleatorio];
+                  System.out.println("error 1 - Deporte");
+                  // Toast.makeText(getActivity(), "Aqui el error", Toast.LENGTH_LONG).show();
 
               }
+
+
+
+              //   }
 
               respuesta2.setText(tempString2);
 
           }
 
           respuesta3.setText(imagenPregunta.getIma_respuesta_correcta());
+
 
           final String respuestaCorrecta2 = imagenPregunta.getIma_respuesta_correcta();
 
@@ -625,218 +629,6 @@ public class FotoJuego extends Fragment implements Response.Listener<JSONObject>
 
 
 
-    /*private class TareaWSObtenerImagen extends AsyncTask<String,Integer,Boolean> {
-        int numeroAleatorio;
-        protected Boolean doInBackground(String... params) {
-
-            boolean resul = true;
-
-            HttpClient httpClient = new DefaultHttpClient();
-            //numeroAleatorio = (int)(Math.random()*50)+1;
-            //if(numeroAleatorio < 0){ numeroAleatorio = numeroAleatorio *-1;}
-            HttpGet get = new
-                    HttpGet("https://ayudaucab.herokuapp.com/api/imagenes/"+numeroAleatorio(50) );
-
-            get.setHeader("content-type", "application/json");
-
-            try
-            {
-
-                //respuesta de la BASE DE DATOS
-                HttpResponse resp = httpClient.execute(get);
-
-                String respStr = EntityUtils.toString(resp.getEntity());
-
-                JSONObject respJSON = new JSONObject(respStr);
-                imagenPregunta = new Imagen();
-                imagenPregunta.setIma_id(Integer.parseInt(respJSON.getString("ima_id")));
-                imagenPregunta.setIma_nombre(respJSON.getString("ima_nombre"));
-                imagenPregunta.setDato(respJSON.getString("bytes"));
-                imagenPregunta.setIma_categoria(respJSON.getString("ima_categoria"));
-                String respuesta_completa = respJSON.getString("ima_respuesta_correcta");
-                String[] parts = respuesta_completa.split("\\d+");
-                respuestaCorrecta = parts[0];
-                imagenPregunta.setIma_respuesta_correcta(respuestaCorrecta);
-
-
-
-                if(imagenPregunta.getIma_respuesta_correcta() == "null")
-                    resul = false;
-            }
-            catch(Exception ex)
-            { //SI NO HAY INTERNET
-                Log.e("ServicioRest IMAGEN","Error!", ex);
-                System.out.println("Error: "+ex.getMessage().toString());
-                resul = false;
-            }
-
-            return resul;
-        }
-
-
-        //SI ya esta lista la imagen de la BASE DE DATOS
-        protected void onPostExecute(Boolean result) {
-
-            if (result)
-            {
-                fotoPregunta.setImageBitmap(imagenPregunta.getImagen());
-                texto1.setText("¿Que " + imagenPregunta.getIma_categoria() + "  es ?");
-                texto2.setText("Intentos: " + intento);
-
-
-                Toast.makeText(getActivity(), "Categoria: "+imagenPregunta.getIma_categoria().
-                        toString(), Toast.LENGTH_LONG).show();
-
-                //PARA RELLENAR LOS BOTONES DE LAS RESPUESTAS INCORRECTAS deporte
-                if (imagenPregunta.getIma_categoria().equalsIgnoreCase("Deporte")) {
-
-                    numeroAleatorio =numeroAleatorio(4);
-
-
-
-                    respuesta1.setText(respuestaCorrecta);
-                    while(respuesta1.getText().toString().equalsIgnoreCase(respuestaCorrecta)){
-                        numeroAleatorio = numeroAleatorio(4);
-
-                        //BUSCA ARRIBA
-                        respuesta1.setText(preguntasDeporte[numeroAleatorio]);
-                    }
-                    int temp = numeroAleatorio;
-
-                    respuesta2.setText(respuestaCorrecta);
-
-                    //mientras que arriba no agarre la respuesta correcta, entonces vas a agarrar la respuesta incorrecta
-                    while(respuesta2.getText().toString().equalsIgnoreCase(respuestaCorrecta)){
-
-                        while (numeroAleatorio == temp)
-                        {
-                            numeroAleatorio = numeroAleatorio(4);
-
-                        }
-                        respuesta2.setText(preguntasDeporte[numeroAleatorio]);
-                    }
-
-
-
-
-                } else {
-
-                    //PARA RELLENAR LOS BOTONES DE LAS RESPUESTAS INCORRECTAS Animal
-                    numeroAleatorio =numeroAleatorio(4);
-                    respuesta1.setText(respuestaCorrecta);
-                    while(respuesta1.getText().toString().equalsIgnoreCase(respuestaCorrecta)){
-                        numeroAleatorio = numeroAleatorio(4);
-
-
-                        respuesta1.setText(preguntasAnimal[numeroAleatorio]);
-                    }
-                    int temp = numeroAleatorio;
-
-                    respuesta2.setText(respuestaCorrecta);
-                    while(respuesta2.getText().toString().equalsIgnoreCase(respuestaCorrecta)){
-
-                        while (numeroAleatorio == temp)
-                        {
-                            numeroAleatorio = numeroAleatorio(4);
-
-                        }
-                        respuesta2.setText(preguntasAnimal[numeroAleatorio]);
-                    }
-
-
-
-                }
-
-
-                // LISTENER DEL BOTON DE LA RESPUESTA INCORRECTA 1
-                respuesta1.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        //My logic for Button goes in here
-
-                        if (respuesta1.getText() == respuestaCorrecta) {
-                            /*mScore = mScore + 1;
-                            updateScore(mScore);
-                            updateQuestion();
-                            //This line of code is optiona
-                            Toast.makeText(QuizActivity.this, "correct", Toast.LENGTH_SHORT).show();*/
-                            //respuestaCorrecta();
-                        //} else {
-                           /* Toast.makeText(QuizActivity.this, "wrong", Toast.LENGTH_SHORT).show();
-                            updateQuestion();*/
-
-                            //respuestaIncorrecta();
-
-                          //  respuesta1.setBackgroundColor(Color.RED);
-                        /*}
-                    }
-                });
-
-                // LISTENER DEL BOTON DE LA RESPUESTA INCORRECTA 2 XQ SON 2 INTENTOS
-                respuesta2.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        //My logic for Button goes in here
-
-                        if (respuesta2.getText() == respuestaCorrecta) {
-                            /*mScore = mScore + 1;
-                            updateScore(mScore);
-                            updateQuestion();
-                            //This line of code is optiona
-                            Toast.makeText(QuizActivity.this, "correct", Toast.LENGTH_SHORT).show();*/
-                            //respuestaCorrecta();
-                        /*} else {
-                           /* Toast.makeText(QuizActivity.this, "wrong", Toast.LENGTH_SHORT).show();
-                            updateQuestion();*/
-
-                            //respuestaIncorrecta();
-
-                          /*  respuesta2.setBackgroundColor(Color.RED);
-                        }
-                    }
-                });
-                respuesta3.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        //My logic for Button goes in here
-
-                        if (respuesta3.getText() == respuestaCorrecta) {
-                           /* mScore = mScore + 1;
-                            updateScore(mScore);
-                            updateQuestion();
-                            //This line of code is optiona
-                            Toast.makeText(QuizActivity.this, "correct", Toast.LENGTH_SHORT).show();*/
-                            //respuestaCorrecta();
-                        /*} else {
-                           /* Toast.makeText(QuizActivity.this, "wrong", Toast.LENGTH_SHORT).show();
-                            updateQuestion();*/
-
-                            //respuestaIncorrecta();
-
-                          /*  respuesta3.setBackgroundColor(Color.RED);
-                        }
-                    }
-                });
-
-
-
-                respuesta3.setText(respuestaCorrecta);
-
-            }else{
-                Intent intent = new Intent(context, MenuPrincipal.class);
-                Bundle bundle = new Bundle();
-
-                bundle.putParcelable("usuario",perfil_usuario);
-                intent.putExtras(bundle);
-                startActivity(intent);
-                System.out.println("Usuario no registrado o mala combianacion de contraseña ");
-                Toast.makeText(getActivity(), "Problemas internos, por favor vuelva a intentarlo", Toast.LENGTH_LONG).show();
-            }
-        }
-    }*/
-
-
-
 
 
     private Usuario perfil_usuario = UsuarioLogeado.userLogin();
@@ -871,6 +663,7 @@ public class FotoJuego extends Fragment implements Response.Listener<JSONObject>
 
             post.setHeader("content-type", "application/json");
 
+
             try
             {
                 //Construimos el objeto cliente en formato JSON
@@ -898,7 +691,9 @@ public class FotoJuego extends Fragment implements Response.Listener<JSONObject>
                     user.setUs_email(params[4]);
                     user.setUs_password(params[5]);
                     user.setUs_nivel_juego(perfil_usuario.getUs_nivel_juego()+1);
+                    UsuarioLogeado.setAumentoNivel(perfil_usuario.getUs_nivel_juego()+1);
                     salir = params[6];
+
                 }
             }
             catch(Exception ex)
@@ -912,11 +707,12 @@ public class FotoJuego extends Fragment implements Response.Listener<JSONObject>
         }
 
         protected void onPostExecute(Boolean result) {
-
+            hidepDialog();
 
             if (result)
             {
-                Toast.makeText(getActivity(), "Aumento de Nivel ", Toast.LENGTH_LONG).show();
+
+                Toast.makeText(context, "Aumento de Nivel ", Toast.LENGTH_LONG).show();
 
                 guardarPreferencias(user);
                 System.out.println("Se ha registrado");

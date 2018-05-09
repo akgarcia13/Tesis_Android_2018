@@ -22,18 +22,21 @@
             <TextView
                 android:text="Nombre"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                />
 
             <EditText
                 android:id="@+id/actulizarNombre"
                 android:layout_width="match_parent"
                 android:layout_marginBottom="10dp"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"/>
 
             <TextView
                 android:text="Apellido"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"/>
 
             <EditText
                 android:id="@+id/actulizarApellido"
@@ -73,7 +76,8 @@
                 <EditText
                     android:id="@+id/actulizarDate"
                     android:layout_width="fill_parent"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    />
 
 
             </LinearLayout>

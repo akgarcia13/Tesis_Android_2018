@@ -294,6 +294,11 @@ public class AudioJuego extends Fragment implements Response.Listener<JSONObject
                             public void onClick(DialogInterface dialogInterface, int i) {
 
                                 if(InternetExcepcion.isOnline(context)){
+                                    progreso = new ProgressDialog(getContext());
+                                    progreso.setMessage("Subiste de nivel!!! ...");
+                                    progreso.setCancelable(false);
+                                    showpDialog();
+
                                     TareaWSAumentarNivelAudioJuego tarea1 = new TareaWSAumentarNivelAudioJuego();
                                     tarea1.execute(
                                             perfil_usuario.getUs_nombre_usuario().toString(),
@@ -330,6 +335,10 @@ public class AudioJuego extends Fragment implements Response.Listener<JSONObject
                             public void onClick(DialogInterface dialogInterface, int i) {
 
                                 if(InternetExcepcion.isOnline(context)){
+                                    progreso = new ProgressDialog(getContext());
+                                    progreso.setMessage("Subiste de nivel!!! ...");
+                                    progreso.setCancelable(false);
+                                    showpDialog();
                                     TareaWSAumentarNivelAudioJuego tarea1 = new TareaWSAumentarNivelAudioJuego();
                                     tarea1.execute(
                                             perfil_usuario.getUs_nombre_usuario().toString(),
@@ -450,6 +459,8 @@ public class AudioJuego extends Fragment implements Response.Listener<JSONObject
                 playMp3(audioJuego.getAu_bytes());
             }
         });*/
+
+
         Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
             @Override
@@ -473,28 +484,30 @@ public class AudioJuego extends Fragment implements Response.Listener<JSONObject
         numeroAleatorio =numeroAleatorio(4);
 
 
-
         respuesta1.setTag(respuestaCorrecta);
         while(respuesta1.getTag().toString().equalsIgnoreCase(respuestaCorrecta)){
             numeroAleatorio = numeroAleatorio(4);
 
 
             respuesta1.setTag(preguntasAnimal[numeroAleatorio]);
-            cargarImagenPregunta(respuesta1);
+
         }
+        cargarImagenPregunta(respuesta1);
         int temp = numeroAleatorio;
 
         respuesta2.setTag(respuestaCorrecta);
         while(respuesta2.getTag().toString().equalsIgnoreCase(respuestaCorrecta)){
+            numeroAleatorio = numeroAleatorio(4);
 
-            while (numeroAleatorio == temp)
-            {
-                numeroAleatorio = numeroAleatorio(4);
+           if (numeroAleatorio != temp)
 
-            }
             respuesta2.setTag(preguntasAnimal[numeroAleatorio]);
-            cargarImagenPregunta(respuesta2);
+
+            System.out.println("error 2 - AudioJuego");
+
         }
+        cargarImagenPregunta(respuesta2);
+
         respuesta3.setTag(respuestaCorrecta);
         cargarImagenPregunta(respuesta3);
 
@@ -577,202 +590,6 @@ public class AudioJuego extends Fragment implements Response.Listener<JSONObject
 
 
     }
-    /*
-    //PETICION AL WEB SERVICE DEL AUDIO
-    private class TareaWSObtenerAudio extends AsyncTask<String,Integer,Boolean> {
-        int numeroAleatorio;
-        protected Boolean doInBackground(String... params) {
-
-            boolean resul = true;
-
-            HttpClient httpClient = new DefaultHttpClient();
-            //numeroAleatorio = (int)(Math.random()*50)+1;
-            //if(numeroAleatorio < 0){ numeroAleatorio = numeroAleatorio *-1;}
-            HttpGet get = new
-                    HttpGet("https://ayudaucab.herokuapp.com/api/audios/"+numeroAleatorio(10) );
-
-            get.setHeader("content-type", "application/json");
-
-            try
-            {
-
-
-                HttpResponse resp = httpClient.execute(get);
-
-                String respStr = EntityUtils.toString(resp.getEntity());
-
-                JSONObject respJSON = new JSONObject(respStr);
-                audioJuego = new Audio();
-                audioJuego.setAu_id(Integer.parseInt(respJSON.getString("au_id")));
-                audioJuego.setAu_nombre(respJSON.getString("au_nombre"));
-                audioJuego.setAu_bytes(respJSON.getString("au_bytes"));
-                audioJuego.setAu_categoria(respJSON.getString("au_categoria"));
-                String respuesta_completa = respJSON.getString("au_respuesta_correcta");
-                String[] parts = respuesta_completa.split("\\.");
-                respuestaCorrecta = parts[0];
-                audioJuego.setAu_respuesta_correcta(respuestaCorrecta);
-
-
-
-                if(audioJuego.getAu_respuesta_correcta() == "null")
-                    resul = false;
-            }
-            catch(Exception ex)
-            {
-                Log.e("ServicioRest IMAGEN","Error!", ex);
-                System.out.println("Error: "+ex.getMessage().toString());
-                resul = false;
-            }
-
-            return resul;
-        }
-
-        protected void onPostExecute(Boolean result) {
-
-            if (result)
-            {
-                //fotoPregunta.setImageBitmap(imagenPregunta.getImagen());
-                texto1.setText("¿Que " + audioJuego.getAu_categoria() + "  es ?");
-                texto2.setText("Intentos: " + intento);
-
-
-
-
-                numeroAleatorio =numeroAleatorio(4);
-
-
-
-                respuesta1.setTag(respuestaCorrecta);
-                while(respuesta1.getTag().toString().equalsIgnoreCase(respuestaCorrecta)){
-                    numeroAleatorio = numeroAleatorio(4);
-
-
-                    respuesta1.setTag(preguntasAnimal[numeroAleatorio]);
-                    cargarImagenPregunta(respuesta1);
-                }
-                int temp = numeroAleatorio;
-
-                respuesta2.setTag(respuestaCorrecta);
-                while(respuesta2.getTag().toString().equalsIgnoreCase(respuestaCorrecta)){
-
-                    while (numeroAleatorio == temp)
-                    {
-                        numeroAleatorio = numeroAleatorio(4);
-
-                    }
-                    respuesta2.setTag(preguntasAnimal[numeroAleatorio]);
-                    cargarImagenPregunta(respuesta2);
-                }
-                respuesta3.setTag(respuestaCorrecta);
-                cargarImagenPregunta(respuesta3);
-
-
-                audioPrincipal.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        //My logic for Button goes in here
-
-                        playMp3(audioJuego.getAu_bytes());
-                    }
-                });
-
-
-                respuesta1.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        //My logic for Button goes in here
-
-                        if (respuesta1.getTag() == respuestaCorrecta) {
-                            /*mScore = mScore + 1;
-                            updateScore(mScore);
-                            updateQuestion();
-                            //This line of code is optiona
-                            Toast.makeText(QuizActivity.this, "correct", Toast.LENGTH_SHORT).show();*/
-                            //respuestaCorrecta();
-      /*                  } else {
-                           /* Toast.makeText(QuizActivity.this, "wrong", Toast.LENGTH_SHORT).show();
-                            updateQuestion();*/
-
-        /*                    respuestaIncorrecta();
-                            respuesta1.setBackgroundColor(Color.RED);
-
-                        }
-                    }
-                });
-                respuesta2.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        //My logic for Button goes in here
-
-                        if (respuesta2.getTag() == respuestaCorrecta) {
-                            /*mScore = mScore + 1;
-                            updateScore(mScore);
-                            updateQuestion();
-                            //This line of code is optiona
-                            Toast.makeText(QuizActivity.this, "correct", Toast.LENGTH_SHORT).show();*/
-          /*                  respuestaCorrecta();
-                        } else {
-                           /* Toast.makeText(QuizActivity.this, "wrong", Toast.LENGTH_SHORT).show();
-                            updateQuestion();*/
-
-              /*              respuestaIncorrecta();
-            /*                respuesta2.setBackgroundColor(Color.RED);
-                        }
-                    }
-                });
-                respuesta3.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        //My logic for Button goes in here
-
-                        if (respuesta3.getTag() == respuestaCorrecta) {
-                           /* mScore = mScore + 1;
-                            updateScore(mScore);
-                            updateQuestion();
-                            //This line of code is optiona
-                            Toast.makeText(QuizActivity.this, "correct", Toast.LENGTH_SHORT).show();*/
-                /*            respuestaCorrecta();
-                        } else {
-                           /* Toast.makeText(QuizActivity.this, "wrong", Toast.LENGTH_SHORT).show();
-                            updateQuestion();*/
-                  /*          respuestaIncorrecta();
-                            respuesta3.setBackgroundColor(Color.RED);
-                        }
-                    }
-                });
-
-
-
-
-
-            }else{
-
-                Intent intent = new Intent(context, MenuPrincipal.class);
-                Bundle bundle = new Bundle();
-
-                bundle.putParcelable("usuario",perfil_usuario);
-                intent.putExtras(bundle);
-                startActivity(intent);
-                System.out.println("Usuario no registrado o mala combianacion de contraseña ");
-                Toast.makeText(getActivity(), "Problemas internos, por favor vuelva a intentarlo", Toast.LENGTH_LONG).show();
-            }
-        }
-    }
-
-    public void salir(){
-
-        if(intento  <= 0){
-            Intent intent = new Intent(context, MenuPrincipal.class);
-
-            Bundle bundle = new Bundle();
-
-            bundle.putParcelable("usuario",perfil_usuario);
-            intent.putExtras(bundle);
-            startActivity(intent);
-            mediaPlayer.stop();
-
-        }
-    }*/
 
     private Usuario perfil_usuario = UsuarioLogeado.userLogin();
     public void guardarPreferencias(Usuario perfil_usuario){
@@ -833,6 +650,7 @@ public class AudioJuego extends Fragment implements Response.Listener<JSONObject
                     user.setUs_email(params[4]);
                     user.setUs_password(params[5]);
                     user.setUs_nivel_juego(perfil_usuario.getUs_nivel_juego()+1);
+                    UsuarioLogeado.setAumentoNivel(perfil_usuario.getUs_nivel_juego()+1);
                     salir=params[6];
                 }
             }
@@ -847,7 +665,7 @@ public class AudioJuego extends Fragment implements Response.Listener<JSONObject
         }
 
         protected void onPostExecute(Boolean result) {
-
+            hidepDialog();
 
             if (result)
             {

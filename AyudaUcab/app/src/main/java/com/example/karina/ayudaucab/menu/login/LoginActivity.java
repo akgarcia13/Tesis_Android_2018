@@ -113,7 +113,7 @@ public class LoginActivity extends AppCompatActivity implements LoginFragment.On
         int posicion = mViewPager.getCurrentItem();
 
        if (posicion == 0){
-            super.onBackPressed();
+           selectTab(0);
        }else if (posicion ==1){
             selectTab(0);
        }else if (posicion == 2){

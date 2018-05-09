@@ -576,6 +576,10 @@ public class MemoriaJuego extends Fragment {
                                 public void onClick(DialogInterface dialogInterface, int i) {
 
                                     if(InternetExcepcion.isOnline(context)){
+                                        progreso = new ProgressDialog(getContext());
+                                        progreso.setMessage("Subiste de nivel!!! ...");
+                                        progreso.setCancelable(false);
+                                        showpDialog();
                                         TareaWSAumentarNivelMemoria tarea1 = new TareaWSAumentarNivelMemoria();
                                         tarea1.execute(
                                                 perfil_usuario.getUs_nombre_usuario().toString(),
@@ -614,6 +618,10 @@ public class MemoriaJuego extends Fragment {
                                 public void onClick(DialogInterface dialogInterface, int i) {
 
                                     if(InternetExcepcion.isOnline(context)){
+                                        progreso = new ProgressDialog(getContext());
+                                        progreso.setMessage("Subiste de nivel!!! ...");
+                                        progreso.setCancelable(false);
+                                        showpDialog();
                                         TareaWSAumentarNivelMemoria tarea1 = new TareaWSAumentarNivelMemoria();
                                         tarea1.execute(
                                                 perfil_usuario.getUs_nombre_usuario().toString(),
@@ -741,6 +749,7 @@ public class MemoriaJuego extends Fragment {
                     user.setUs_email(params[4]);
                     user.setUs_password(params[5]);
                     user.setUs_nivel_juego(perfil_usuario.getUs_nivel_juego()+1);
+                    UsuarioLogeado.setAumentoNivel(perfil_usuario.getUs_nivel_juego()+1);
                     salir = params[6];
                 }
             }
@@ -755,7 +764,7 @@ public class MemoriaJuego extends Fragment {
         }
 
         protected void onPostExecute(Boolean result) {
-
+            hidepDialog();
             if (result)
             {
 

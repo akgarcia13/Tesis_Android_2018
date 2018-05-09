@@ -51,7 +51,8 @@
                 android:id="@+id/registroNombre"
                 android:layout_width="match_parent"
                 android:layout_marginBottom="10dp"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"/>
 
             <TextView
                 android:text="Apellido"
@@ -62,7 +63,8 @@
                 android:id="@+id/registroApellido"
                 android:layout_width="match_parent"
                 android:layout_marginBottom="10dp"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"/>
 
             <TextView
                 android:text="Correo Electronico"
